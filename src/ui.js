@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable array-bracket-spacing */
 import buttonIcon from './svg/button-icon.svg';
 
 /**
@@ -18,13 +20,13 @@ export default class Ui {
     this.onSelectFile = onSelectFile;
     this.nodes = {
       wrapper: make('div', [this.CSS.baseClass, this.CSS.wrapper]),
-      imageContainer: make('div', [ this.CSS.imageContainer ]),
+      imageContainer: make('div', [this.CSS.imageContainer]),
       fileButton: this.createFileButton(),
       imageEl: undefined,
       imagePreloader: make('div', this.CSS.imagePreloader),
-      caption: make('div', [this.CSS.input, this.CSS.caption], {
-        contentEditable: true
-      })
+      caption: make('p', [this.CSS.input, this.CSS.caption], {
+        contentEditable: true,
+      }),
     };
 
     /**
@@ -62,9 +64,9 @@ export default class Ui {
       imageContainer: 'image-tool__image',
       imagePreloader: 'image-tool__image-preloader',
       imageEl: 'image-tool__image-picture',
-      caption: 'image-tool__caption'
+      caption: 'image-tool__caption',
     };
-  };
+  }
 
   /**
    * Ui statuses:
@@ -77,7 +79,7 @@ export default class Ui {
     return {
       EMPTY: 'empty',
       UPLOADING: 'loading',
-      FILLED: 'filled'
+      FILLED: 'filled',
     };
   }
 
@@ -100,9 +102,10 @@ export default class Ui {
    * @return {Element}
    */
   createFileButton() {
-    let button = make('div', [ this.CSS.button ]);
+    let button = make('div', [this.CSS.button]);
 
-    button.innerHTML = this.config.buttonContent || `${buttonIcon} Select an Image`;
+    button.innerHTML =
+      this.config.buttonContent || `${buttonIcon} Select an Image`;
 
     button.addEventListener('click', () => {
       this.onSelectFile();
@@ -140,7 +143,7 @@ export default class Ui {
     const tag = /\.mp4$/.test(url) ? 'VIDEO' : 'IMG';
 
     let attributes = {
-      src: url
+      src: url,
     };
 
     /**
@@ -211,7 +214,10 @@ export default class Ui {
   toggleStatus(status) {
     for (const statusType in Ui.status) {
       if (Ui.status.hasOwnProperty(statusType)) {
-        this.nodes.wrapper.classList.toggle(`${this.CSS.wrapper}--${Ui.status[statusType]}`, status === Ui.status[statusType]);
+        this.nodes.wrapper.classList.toggle(
+          `${this.CSS.wrapper}--${Ui.status[statusType]}`,
+          status === Ui.status[statusType]
+        );
       }
     }
   }
@@ -222,7 +228,10 @@ export default class Ui {
    * @param {boolean} status - true for enable, false for disable
    */
   applyTune(tuneName, status) {
-    this.nodes.wrapper.classList.toggle(`${this.CSS.wrapper}--${tuneName}`, status);
+    this.nodes.wrapper.classList.toggle(
+      `${this.CSS.wrapper}--${tuneName}`,
+      status
+    );
   }
 }
 
