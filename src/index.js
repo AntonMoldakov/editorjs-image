@@ -1,3 +1,5 @@
+/* eslint-disable array-bracket-spacing */
+/* eslint-disable comma-dangle */
 /**
  * Image Tool for the Editor.js
  * @author CodeX <team@ifmo.su>
@@ -75,6 +77,14 @@ import Uploader from './uploader';
  */
 export default class ImageTool {
   /**
+   * Notify core that read-only mode is supported
+   *
+   * @returns {boolean}
+   */
+  static get isReadOnlySupported() {
+    return true;
+  }
+  /**
    * Get Tool toolbox settings
    * icon - Tool icon's SVG
    * title - title to show in toolbox
@@ -84,7 +94,7 @@ export default class ImageTool {
   static get toolbox() {
     return {
       icon: ToolboxIcon,
-      title: 'Image'
+      title: 'Image',
     };
   }
 
@@ -92,9 +102,11 @@ export default class ImageTool {
    * @param {ImageToolData} data - previously saved data
    * @param {ImageConfig} config - user config for Tool
    * @param {object} api - Editor.js API
+   * @param {Boolean} readOnly - read-only mode flag
    */
-  constructor({ data, config, api }) {
+  constructor({ data, config, api, readOnly }) {
     this.api = api;
+    this.readOnly = readOnly;
 
     /**
      * Tool's initial config
@@ -107,7 +119,7 @@ export default class ImageTool {
       types: config.types || 'image/*',
       captionPlaceholder: config.captionPlaceholder || 'Caption',
       buttonContent: config.buttonContent || '',
-      uploader: config.uploader || undefined
+      uploader: config.uploader || undefined,
     };
 
     /**
@@ -116,7 +128,7 @@ export default class ImageTool {
     this.uploader = new Uploader({
       config: this.config,
       onUpload: (response) => this.onUpload(response),
-      onError: (error) => this.uploadingFailed(error)
+      onError: (error) => this.uploadingFailed(error),
     });
 
     /**
@@ -124,14 +136,15 @@ export default class ImageTool {
      */
     this.ui = new Ui({
       api,
+      readOnly,
       config: this.config,
       onSelectFile: () => {
         this.uploader.uploadSelectedFile({
           onPreview: (src) => {
             this.ui.showPreloader(src);
-          }
+          },
         });
-      }
+      },
     });
 
     /**
@@ -139,7 +152,7 @@ export default class ImageTool {
      */
     this.tunes = new Tunes({
       api,
-      onChange: (tuneName, state) => this.tuneToggled(tuneName, state)
+      onChange: (tuneName, state) => this.tuneToggled(tuneName, state),
     });
 
     /**
@@ -202,21 +215,21 @@ export default class ImageTool {
       /**
        * Paste HTML into Editor
        */
-      tags: [ 'img' ],
+      tags: ['img'],
 
       /**
        * Paste URL of image into the Editor
        */
       patterns: {
-        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i
+        image: /https?:\/\/\S+\.(gif|jpe?g|tiff|png)$/i,
       },
 
       /**
        * Drag n drop file from into the Editor
        */
       files: {
-        mimeTypes: [ 'image/*' ]
-      }
+        mimeTypes: ['image/*'],
+      },
     };
   }
 
@@ -330,7 +343,7 @@ export default class ImageTool {
 
     this.api.notifier.show({
       message: 'Can not upload an image, try another',
-      style: 'error'
+      style: 'error',
     });
     this.ui.hidePreloader();
   }
@@ -376,7 +389,7 @@ export default class ImageTool {
     this.uploader.uploadByFile(file, {
       onPreview: (src) => {
         this.ui.showPreloader(src);
-      }
+      },
     });
   }
 
