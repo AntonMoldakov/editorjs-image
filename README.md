@@ -5,6 +5,10 @@
 Image Block for the [Editor.js](https://editorjs.io).
 
 ![](https://capella.pics/63a03d04-3816-45b2-87b2-d85e556f0066.jpg)
+![](https://drive.google.com/file/d/1tnTeHMIMcobHtbNHEadvoFtMuvYK_NVs/view?usp=share_link)
+![](https://drive.google.com/file/d/1Oc8p7Tlw3_lcHAjv-HleuLc2bcz5JxOM/view?usp=share_link)
+![](https://drive.google.com/file/d/1Ri-xrkSjuKVjXu1eRF3Le_wsciMT6w-G/view?usp=share_link)
+![](https://drive.google.com/file/d/1WbU8T8y07RFtfbFYOCTKlMnrDhvfJX7A/view?usp=share_link)
 
 ## Features
 
@@ -14,6 +18,13 @@ Image Block for the [Editor.js](https://editorjs.io).
 - Pasting files and screenshots from Clipboard
 - Allows to add border, background
 - Allows to stretch image to the container's full-width
+
+## Fork features
+
+- Added wrapping text around an image
+- Added read only mode
+- Deleted background tool
+- Deleted border tool
 
 **Note** This Tool requires server-side implementation for file uploading. See [backend response format](#server-format) for more details.
 
