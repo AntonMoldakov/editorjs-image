@@ -15,7 +15,7 @@
   }
 
   &__image {
-    border-radius: 3px;
+    border-radius: 12px;
     overflow: hidden;
     margin-bottom: 10px;
     width: fit-content;
